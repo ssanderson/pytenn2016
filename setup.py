@@ -12,9 +12,7 @@ def main():
         description="PyTennessee Talk 2016",
         author="Scott Sanderson",
         author_email="scott.b.sanderson90@gmail.com",
-        packages=find_packages(include='pytenn2016.*'),
-        include_package_data=True,
-        zip_safe=True,
+        packages=['pytenn2016'],
         url="https://github.com/ssanderson/pytenn-2016",
         classifiers=[
             'Framework :: IPython',
