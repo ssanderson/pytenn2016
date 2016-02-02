@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 
 
 def install_requires():
@@ -23,3 +23,7 @@ def main():
         ],
         install_requires=install_requires(),
     )
+
+
+if __name__ == '__main__':
+    main()
