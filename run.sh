@@ -1,4 +1,6 @@
 #!/bin/bash
 
+export JUPYTER_CONFIG_DIR=config jupyter notebook notebooks
 jupyter nbextension install RISE/livereveal --symlink --nbextensions config/nbextensions
-jupyter notebook notebooks --config config/jupyter_notebook_config.py
+jupyter nbextension enable livereveal/main
+jupyter notebook notebooks

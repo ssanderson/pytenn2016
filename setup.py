@@ -2,7 +2,7 @@ from setuptools import setup
 
 
 def install_requires():
-    return ['IPython', 'jupyter[all]']
+    return ['jupyter[all]', 'codetransformer==0.6']
 
 
 def main():
