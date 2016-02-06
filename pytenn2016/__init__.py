@@ -1,5 +1,3 @@
-from codecs import register
-from .encoding import search_function
+from . import encoding
 
-register(search_function)
-
+__all__ = ['encoding']

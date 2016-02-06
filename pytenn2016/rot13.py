@@ -1,4 +1,4 @@
 # encoding: pytenn2016-rot13
 
-qrs uryyb_ebg13():
+qrs uryyb():
     cevag("Uryyb Ebgngrq Jbeyq!")

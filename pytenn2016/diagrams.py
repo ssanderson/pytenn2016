@@ -13,42 +13,69 @@ def notebook_image_path(basename):
     return relpath('..', 'notebooks', 'images', basename)
 
 
+def path_graph(nodes):
+    graph = AGraph(directed=True)
+
+    for node in nodes:
+        graph.add_node(node, shape='rectangle')
+
+    graph.add_path(nodes)
+    return graph
+
+
 diagrams = []
 
 
 @diagrams.append
 def compiler():
-    graph = AGraph(directed=True)
-
-    graph.graph_attr['label'] = "CPython Compilation Stages"
-    graph.graph_attr['labelloc'] = "t"
-    graph.graph_attr['rankdir'] = 'LR'
-
-    graph.add_node('Raw Source Code', shape='rectangle')
-    graph.add_node('Source Text', shape='rectangle')
-    graph.add_node('Abstract Syntax Tree', shape='rectangle')
-    graph.add_node('Bytecode', shape='rectangle')
-
-    graph.add_path([
-        'Raw Source Code',
-        'Source Text',
+    graph = path_graph([
+        'Raw Source (Bytes)',
+        'Source Text (Unicode)',
         'Abstract Syntax Tree',
         'Bytecode',
+        'Execution',
     ])
+
+    graph.graph_attr['label'] = "CPython Code Representations"
+    graph.graph_attr['labelloc'] = "t"
+    graph.graph_attr['rankdir'] = 'LR'
 
     return graph
 
 
 @diagrams.append
 def decoder():
-    graph = AGraph(directed=True)
+    graph = path_graph(['Raw Source (Bytes)', 'Source Text (Unicode)'])
+    graph.graph_attr['rankdir'] = 'LR'
+
+    return graph
+
+
+@diagrams.append
+def importhook():
+
+    graph = path_graph([
+        'Module Name',
+        'Raw Source (Bytes)',
+        'Source Text (Unicode)',
+        'Abstract Syntax Tree',
+        'Bytecode',
+        'Execution',
+    ])
+
+    graph.add_edge('Module Name', 'Bytecode', color='red', label='Import Hook')
 
     graph.graph_attr['rankdir'] = 'LR'
 
-    graph.add_node('Raw Source Code', shape='rectangle')
-    graph.add_node('Source Text', shape='rectangle')
+    return graph
 
-    graph.add_path(['Raw Source Code', 'Source Text'])
+
+@diagrams.append
+def bytecode():
+    graph = path_graph(['Bytecode', 'Execution'])
+    graph.add_edge('Bytecode', 'Bytecode', label='Bytecode Transformer')
+
+    graph.graph_attr['rankdir'] = 'LR'
     return graph
 
 
