@@ -4,10 +4,14 @@ from setuptools import setup
 def install_requires():
     return [
         'jupyter[all]',
-        'codetransformer==0.6',
-        'hy==0.11.1',
-        'Cython==0.23',
+        'codetransformer>=0.6',
+        'hy>=0.11.1',
+        'pygraphviz>=1.3.1',
     ]
+
+
+def extras_require():
+    return {'extra': ['numba>=0.23.1', 'Cython>=0.23']}
 
 
 def main():
